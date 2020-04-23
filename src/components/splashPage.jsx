@@ -1,14 +1,17 @@
 import React from "react";
 import { SplashButton } from "../styles/buttons";
 import { SplashContainer, Container, SplashImageContainer } from "../styles/containers";
+import {Link} from "react-router-dom"
 
 export default function splashPage() {
   return (
     <SplashContainer>
     <Container>
-      <SplashButton>
-        <span>Animes</span>
-      </SplashButton>
+      <Link to="/anime">
+        <SplashButton>
+          <span>Animes</span>
+        </SplashButton>
+      </Link>
       <SplashImageContainer>
         {/* Insert image */}
       </SplashImageContainer>
@@ -19,10 +22,11 @@ export default function splashPage() {
       </SplashImageContainer>
     </Container>
     <Container>
-      <SplashButton>
-        <span>Games</span>
-      </SplashButton>
-
+      <Link to="/anime">
+        <SplashButton>
+          <span>Games</span>
+        </SplashButton>
+      </Link>
       <SplashImageContainer>
         {/* Insert image */}
       </SplashImageContainer>
