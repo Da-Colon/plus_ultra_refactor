@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  border: solid white;
   width: 300px;
   height: 475px;
-  border: solid white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,8 +11,8 @@ export const Container = styled.div`
 `
 
 export const SplashContainer = styled.div`
-  display:flex;
   border: 2px solid red;
+  display:flex;
   height: 100%;
   align-items: center;
   justify-content: space-around;
@@ -22,4 +22,19 @@ export const SplashImageContainer = styled.div`
   border: green solid;
   width: 260px;
   height: 360px;
+`
+
+export const NavContainer = styled.div`
+  border: solid white;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+`
+
+export const MainContainer = styled.div`
+  border: 2px solid red;
+  display:flex;
+  height: 100%;
+  flex-direction: column;
 `

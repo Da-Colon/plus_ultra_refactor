@@ -1,9 +1,10 @@
 import React from 'react'
+import Component from '../components/gamesPage'
 
-export default function GamesPage() {
+export default function GamesPage(props) {
   return (
-    <div>
-      
-    </div>
+    <>
+     <Component page={props.page}/>
+    </>
   )
 }

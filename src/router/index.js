@@ -1,11 +1,14 @@
-import React from "react"
+import React, {useState} from "react"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
 import SplashPage from "../containers/SplashPage"
 import GamesPage from "../containers/GamesPage"
 import AnimePage from "../containers/AnimePage"
 
-const AppRouter = () => (
+const AppRouter = () => {
+  const [page, setPage] = useState("")
+  
+  return (
   <Router>
     <Route 
       path="/" 
@@ -14,6 +17,7 @@ const AppRouter = () => (
     <Route
       path="/games"
       component={GamesPage}
+      page={page}
       exact />
     <Route
       path="/anime"
@@ -21,5 +25,5 @@ const AppRouter = () => (
       exact />
   </Router>
 )
-
+  }
 export default AppRouter

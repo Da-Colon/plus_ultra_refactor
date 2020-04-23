@@ -7,9 +7,9 @@ export default function splashPage() {
   return (
     <SplashContainer>
     <Container>
-      <Link to="/anime">
+      <Link to="/anime" id="nav-anime">
         <SplashButton>
-          <span>Animes</span>
+          <span>Anime</span>
         </SplashButton>
       </Link>
       <SplashImageContainer>
@@ -22,7 +22,7 @@ export default function splashPage() {
       </SplashImageContainer>
     </Container>
     <Container>
-      <Link to="/anime">
+      <Link to="/games" id="nav-games">
         <SplashButton>
           <span>Games</span>
         </SplashButton>
