@@ -14,3 +14,9 @@ export const SplashButton = styled.button`
     color: darkred;
   }
 `
+
+export const SearchButton = styled.button`
+  width: 150px;
+  height: 24px;
+  margin: 16px;
+`

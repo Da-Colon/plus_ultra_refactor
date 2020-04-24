@@ -38,3 +38,12 @@ export const MainContainer = styled.div`
   height: 100%;
   flex-direction: column;
 `
+
+export const ToolBarContainer = styled.div`
+  border: solid yellow;
+  height: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`
