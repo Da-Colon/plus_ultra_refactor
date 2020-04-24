@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  border: solid white;
   width: 300px;
   height: 475px;
   display: flex;
@@ -11,7 +10,6 @@ export const Container = styled.div`
 `
 
 export const SplashContainer = styled.div`
-  border: 2px solid red;
   display:flex;
   height: 100%;
   align-items: center;
@@ -19,13 +17,11 @@ export const SplashContainer = styled.div`
 `
 
 export const SplashImageContainer = styled.div`
-  border: green solid;
   width: 260px;
   height: 360px;
 `
 
 export const NavContainer = styled.div`
-  border: solid white;
   width: 100%;
   height: 100px;
   display: flex;
@@ -33,14 +29,12 @@ export const NavContainer = styled.div`
 `
 
 export const MainContainer = styled.div`
-  border: 2px solid red;
   display:flex;
   height: 100%;
   flex-direction: column;
 `
 
 export const ToolBarContainer = styled.div`
-  border: solid yellow;
   height: 64px;
   width: 100%;
   display: flex;
@@ -49,59 +43,59 @@ export const ToolBarContainer = styled.div`
   margin-top: 16px;
 `
 
-export const GamesWrapper = styled.div`
-  border: solid blue;
+export const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
 `
 
-export const GameContainer = styled.div`
+export const ContentContainer = styled.div`
   border: solid orange;
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 400px;
   background-color: rgba(255,255,255,0.2);
   margin-top: 32px;
 `
 
-export const GameTitleContainer = styled.div`
-  border: solid red;
+export const TitleContainer = styled.div`
 `
 
-export const GameInfoContainer = styled.div`
-  border: solid;
+export const MainInfoContainer = styled.div`
   display: flex;
   box-sizing: content-box;
-  width: 100%;
-  height: 100%;
-  justify-content: space-between;
-  align-items: center;
 `
 
-export const GamesImageContainer = styled.div`
-  border: solid darkgreen;
+export const ImageContainer = styled.div`
+  border: solid;
   width: 300px;
-  height: 250px;
+  height: 300px;
   margin: 32px;
 `
 
-export const GameDescriptionContainer = styled.div`
-  border: solid darkred;
-  height: 50%;
+export const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  margin: 16px;
+  min-width: 300px;
+  max-height: 400px; 
+`
+
+export const DescriptionContainer = styled.div`
   overflow-y: scroll;
   -ms-overflow-style: none;
   ::-webkit-scrollbar {
   display: none;
 }
-  width: fit-content;
   text-align: center;
-  margin: 24px;
+  margin: 16px;
+  height: 100%;
   font-size: 1.1rem;
 `
 
-export const GamePlatformsContainer = styled.div`
-  border: solid cyan;
-  height: 100%;
-  width: 300px;
+export const LinksContainer = styled.div`
+  height: 64px;
+  margin: 16px;
 `
