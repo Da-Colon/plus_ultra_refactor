@@ -18,6 +18,10 @@ html {
   color: rgb(26, 25, 25);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(./assets/mainPage.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 *,
