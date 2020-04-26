@@ -29,14 +29,14 @@ export default function GamesPage(props) {
 
       <ToolBarContainer>
         <Select styles={selectStyle} />
-        <form action="submit">
-          <SearchBar type="text" placeholder="Search Games..." />
+        <form onSubmit={props.handleSearchSubmit}>
+          <SearchBar type="text" onChange={props.handleSearchChange} value={props.searchValue} placeholder="Search Games..." />
           <SearchButton type="submit">Search</SearchButton>
         </form>
       </ToolBarContainer>
       {props.gamesInfo.map((game, i) => (
         <InfoWrapper key={game.name}>
-          {console.log(game)}
+          {/* {console.log(game)} */}
         <ContentContainer>
           <TitleContainer>
             <GamesTitle>{game.name}</GamesTitle>
@@ -56,7 +56,7 @@ export default function GamesPage(props) {
                 <li>Availible On:</li>
                 {game.parent_platforms.map(platform => (
                   <li key={platform.platform.name}>
-                      <a href={props.handleStoreLinks(platform.platform.name, game.stores, game.name)} >
+                      <a href={props.handleStoreLinks(platform.platform.name, game.stores, game.name)} target="_blank" rel="noopener noreferrer">
                       {platform.platform.name === "Nintendo" ? (
                         <IconImage src={nintendoLogo} />
                         ) : (

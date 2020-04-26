@@ -3,20 +3,17 @@ import Component from "../components/gamesPage";
 import get from "../utils/get";
 
 export default function GamesPage(props) {
-  const [gamesInfo, setGamesInfo] = useState([]);
+  const [gamesInfo, setGamesInfo] = useState([])
+  const [searchValue, setSearchValue] = useState("")
 
   useEffect(() => {
-    get(
-      "https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=-added&page_size=20"
-    ).then((response) => {
-      response.results.forEach(game => {
-        get(
-          `https://api.rawg.io/api/games/${game.slug.replace(/\?/g, " ")}`
-        ).then((res) => {
-          setGamesInfo((info) => [...info, res]);
-        });
-      });
-    });
+    (async ()=> {
+      const responseGamesTitles = await get("https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=-rating&page_size=5")
+      responseGamesTitles.results.forEach(async game => {
+        const responseGames = await get(`https://api.rawg.io/api/games/${game.slug.replace(/\?/g, " ")}`)
+        setGamesInfo((info) => [...info, responseGames]);
+    })
+  })()
   }, []);
 
   const handleIconClass = (platformName) => {
@@ -47,16 +44,11 @@ export default function GamesPage(props) {
       const checkThis = platformName + " " + stores[i].store.name;
       switch (checkThis) {
         case "Xbox Xbox Store":
-          return stores[i].url;
         case "PlayStation PlayStation Store":
-          return stores[i].url;
         case "iOS App Store":
-          return stores[i].url;
         case "Android Google Play":
-          return stores[i].url;
         case "PC Steam":
         case "Apple Macintosh Steam":
-          return stores[i].url;
         case "PlayStation Epic Games":
         case "PC Epic Games":
         case "Xbox Epic Games":
@@ -69,11 +61,33 @@ export default function GamesPage(props) {
     return `https://www.google.com/search?q=${name}`;
   };
 
+  const handleSearchChange = e => {
+    setSearchValue(e.target.value)
+  }
+
+  const handleSearchSubmit = async e => {
+    e.preventDefault()
+    try{
+      const title = searchValue.replace(/\s/g, "-")
+      const response = await get(`https://api.rawg.io/api/games/${title}`)
+      console.log(response.detail)
+      response.detail && response.detail === "Not Found" ?  
+      ( alert("Title Not Found") ) : (
+        setGamesInfo([response])
+      )
+    } catch{
+      alert("Don't leave Search Blank")
+    }
+  }
+
   return (
     <>
       <Component
+        handleSearchChange={handleSearchChange}
+        handleSearchSubmit={handleSearchSubmit}
         handleStoreLinks={handleStoreLinks}
         handleIconClass={handleIconClass}
+        searchValue={searchValue}
         gamesInfo={gamesInfo}
       />
     </>
