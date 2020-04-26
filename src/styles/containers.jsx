@@ -91,11 +91,20 @@ export const DescriptionContainer = styled.div`
 }
   text-align: center;
   margin: 16px;
-  height: 100%;
+  height: 300px;
   font-size: 1.1rem;
 `
 
 export const LinksContainer = styled.div`
   height: 64px;
-  margin: 16px;
+  margin-bottom: 46px;
+
+  ul{
+    display: flex;
+    align-items: center;
+  }
+
+  li{
+    margin-left: 32px;
+  }
 `

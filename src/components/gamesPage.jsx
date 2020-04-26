@@ -16,7 +16,9 @@ import {
 import { SearchBar } from "../styles/inputs";
 import { SearchButton } from "../styles/buttons";
 import { selectStyle } from "../styles/selectStyle";
-import { GamesTitle, Image } from "../styles/text";
+import { GamesTitle, Image, IconImage } from "../styles/text";
+import '@fortawesome/fontawesome-free/css/all.css'
+import nintendoLogo from '../assets/nintendoLogo.png'
 
 export default function GamesPage(props) {
 
@@ -34,6 +36,7 @@ export default function GamesPage(props) {
       </ToolBarContainer>
       {props.gamesInfo.map((game, i) => (
         <InfoWrapper key={game.name}>
+          {console.log(game)}
         <ContentContainer>
           <TitleContainer>
             <GamesTitle>{game.name}</GamesTitle>
@@ -49,7 +52,20 @@ export default function GamesPage(props) {
                 {game.description_raw}
               </DescriptionContainer>
               <LinksContainer>
-                {/* Available Platform here */}
+              <ul>
+                <li>Availible On:</li>
+                {game.parent_platforms.map(platform => (
+                  <li key={platform.platform.name}>
+                      <a href={props.handleStoreLinks(platform.platform.name, game.stores, game.name)} >
+                      {platform.platform.name === "Nintendo" ? (
+                        <IconImage src={nintendoLogo} />
+                        ) : (
+                          <i className={props.handleIconClass(platform.platform.name)} />
+                          )}
+                      </a>
+                    </li>
+                  ))}
+              </ul>
               </LinksContainer>
             </FlexContainer>
 
