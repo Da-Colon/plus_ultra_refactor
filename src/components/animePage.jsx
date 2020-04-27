@@ -16,9 +16,11 @@ import {
 import { SearchBar } from "../styles/inputs";
 import { SearchButton } from "../styles/buttons";
 import { selectStyle } from "../styles/selectStyle";
-import { GamesTitle } from "../styles/text";
+import { GamesTitle, Image, IconImage } from "../styles/text";
+import '@fortawesome/fontawesome-free/css/all.css'
 
-export default function GamesPage(props) {
+
+export default function AnimePage(props) {
   return (
     <MainContainer>
       <Navigation page={props.page} />
@@ -30,29 +32,27 @@ export default function GamesPage(props) {
           <SearchButton type="submit">Search</SearchButton>
         </form>
       </ToolBarContainer>
-      <InfoWrapper>
+      {props.animes.map(anime => (
+
+        <InfoWrapper key={anime.attributes.titles.en_jp}>
         <ContentContainer>
           <TitleContainer>
-            <GamesTitle>PlaceHolder Title</GamesTitle>
+            <GamesTitle>{anime.attributes.titles.en_jp}</GamesTitle>
           </TitleContainer>
 
           <MainInfoContainer>
-            <ImageContainer>{/* Image goes here */}</ImageContainer>
+            <ImageContainer>
+              <Image src={anime.attributes.posterImage.small} />
+            </ImageContainer>
             
             <FlexContainer>
               <DescriptionContainer>
-                Commodo enim ex sit anim sunt aliquip ex tempor id eiusmod. Enim
-                cupidatat enim irure ea velit cupidatat consequat minim tempor
-                enim occaecat laboris aliquip ad. Commodo deserunt incididunt
-                duis officia. Adipisicing ut commodo qui duis qui aliquip
-                tempor. Commodo enim ex sit anim sunt aliquip ex tempor id
-                eiusmod. Enim cupidatat enim irure ea velit cupidatat consequat
-                minim tempor enim occaecat laboris aliquip ad. Commodo deserunt
-                incididunt duis officia. Adipisicing ut commodo qui duis qui
-                aliquip tempor.
+                {anime.attributes.synopsis}
               </DescriptionContainer>
               <LinksContainer>
-                {/* Available Platform here */}
+                <a href={props.handleYoutubeLink(anime.attributes.youtubeVideoId, anime.attributes.slug)} target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-youtube"  />
+                </a>
               </LinksContainer>
             </FlexContainer>
 
@@ -60,6 +60,7 @@ export default function GamesPage(props) {
         </ContentContainer>
 
       </InfoWrapper>
+        ))}
     </MainContainer>
   );
 }
