@@ -16,7 +16,7 @@ import {
 import { SearchBar } from "../styles/inputs";
 import { SearchButton } from "../styles/buttons";
 import { selectStyle } from "../styles/selectStyle";
-import { GamesTitle, Image, IconImage } from "../styles/text";
+import { GamesTitle, Image} from "../styles/text";
 import '@fortawesome/fontawesome-free/css/all.css'
 
 
@@ -27,8 +27,8 @@ export default function AnimePage(props) {
       {/* <Select /> */}
       <ToolBarContainer>
         <Select styles={selectStyle} />
-        <form action="submit">
-          <SearchBar type="text" placeholder="Search Games..." />
+        <form onSubmit={props.handleSearchSubmit}>
+        <SearchBar type="text" onChange={props.handleSearchChange} value={props.searchValue} placeholder="Search Anime..." />
           <SearchButton type="submit">Search</SearchButton>
         </form>
       </ToolBarContainer>
