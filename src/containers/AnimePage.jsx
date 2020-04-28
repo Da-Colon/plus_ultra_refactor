@@ -5,10 +5,11 @@ import get from '../utils/get'
 export default function AnimePage() {
   const [animes, setAnimes] = useState([])
   const [searchValue, setSearchValue] = useState("")
+  const [step, setStep] = useState(1)
 
   useEffect(() => {
     (async () => {
-      const response = await get(`https://kitsu.io/api/edge//anime?page[limit]=5&page[offset]=10`)
+      const response = await get(`https://kitsu.io/api/edge//anime?page[limit]=10&page[offset]=1`)
       setAnimes(response.data)
     })()
   },[])
@@ -17,7 +18,7 @@ export default function AnimePage() {
     if(!youtubeLink){
       return `https://www.youtube.com/results?search_query=${animeName}`
     }
-    return `https://www.youtube.com/watch?v=${youtubeLink}`
+    return `https://www.youtube.com/embed/${youtubeLink}`
   }
 
   const handleSearchChange = e => {
@@ -37,7 +38,8 @@ export default function AnimePage() {
 
   return (
     <>
-     <Component 
+     <Component
+      step={step}
       animes={animes} 
       handleYoutubeLink={handleYoutubeLink}
       handleSearchChange={handleSearchChange}

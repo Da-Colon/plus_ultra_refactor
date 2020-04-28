@@ -1,5 +1,4 @@
 import React from "react";
-import Select from "react-select";
 import Navigation from "../components/navigation";
 import {
   MainContainer,
@@ -11,56 +10,72 @@ import {
   ImageContainer,
   DescriptionContainer,
   LinksContainer,
-  FlexContainer,
+  MediaContainer,
+  VideoContainer,
 } from "../styles/containers";
-import { SearchBar } from "../styles/inputs";
+import { SearchBar, Form } from "../styles/inputs";
 import { SearchButton } from "../styles/buttons";
-import { selectStyle } from "../styles/selectStyle";
-import { GamesTitle, Image} from "../styles/text";
-import '@fortawesome/fontawesome-free/css/all.css'
-
+import { GamesTitle, Image } from "../styles/text";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 export default function AnimePage(props) {
   return (
     <MainContainer>
       <Navigation page={props.page} />
-      {/* <Select /> */}
       <ToolBarContainer>
-        <Select styles={selectStyle} />
-        <form onSubmit={props.handleSearchSubmit}>
-        <SearchBar type="text" onChange={props.handleSearchChange} value={props.searchValue} placeholder="Search Anime..." />
+        <Form onSubmit={props.handleSearchSubmit}>
+          <SearchBar
+            type="text"
+            onChange={props.handleSearchChange}
+            value={props.searchValue}
+            placeholder="Search Anime..."
+          />
           <SearchButton type="submit">Search</SearchButton>
-        </form>
+        </Form>
       </ToolBarContainer>
-      {props.animes.map(anime => (
+      <InfoWrapper>
+        {props.animes.map((anime) => (
+          <ContentContainer key={anime.attributes.titles.en_jp}>
+            <TitleContainer>
+              <GamesTitle>{anime.attributes.titles.en_jp}</GamesTitle>
+            </TitleContainer>
 
-        <InfoWrapper key={anime.attributes.titles.en_jp}>
-        <ContentContainer>
-          <TitleContainer>
-            <GamesTitle>{anime.attributes.titles.en_jp}</GamesTitle>
-          </TitleContainer>
+            <MainInfoContainer>
+              <MediaContainer>
+                {props.step === 0 ? (
+                  <ImageContainer>
+                    <Image src={anime.attributes.posterImage.medium} />
+                  </ImageContainer>
+                ) : props.step === 1 ? (
+                  <VideoContainer>
+                    <iframe
+                      src={props.handleYoutubeLink(
+                        anime.attributes.youtubeVideoId,
+                        anime.attributes.slug
+                      )}
+                      frameborder="0"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </VideoContainer>
+                ) : props.step === 2 && anime.attributes.coverImage ? (
+                  <ImageContainer>
+                    <Image src={anime.attributes.coverImage.tiny} />
+                  </ImageContainer>
+                ) : (
+                  "" //Add No Image Graphic
+                )}
+              </MediaContainer>
 
-          <MainInfoContainer>
-            <ImageContainer>
-              <Image src={anime.attributes.posterImage.small} />
-            </ImageContainer>
-            
-            <FlexContainer>
               <DescriptionContainer>
-                {anime.attributes.synopsis}
+                <p>{anime.attributes.synopsis}</p>
               </DescriptionContainer>
-              <LinksContainer>
-                <a href={props.handleYoutubeLink(anime.attributes.youtubeVideoId, anime.attributes.slug)} target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-youtube"  />
-                </a>
-              </LinksContainer>
-            </FlexContainer>
 
-          </MainInfoContainer>
-        </ContentContainer>
-
-      </InfoWrapper>
+              <LinksContainer></LinksContainer>
+            </MainInfoContainer>
+          </ContentContainer>
         ))}
+      </InfoWrapper>
     </MainContainer>
   );
 }

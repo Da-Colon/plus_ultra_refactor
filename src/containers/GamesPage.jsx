@@ -67,18 +67,13 @@ export default function GamesPage(props) {
 
   const handleSearchSubmit = async e => {
     e.preventDefault()
-    try{
       const title = searchValue.replace(/\s/g, "-")
       const response = await get(`https://api.rawg.io/api/games/${title}`)
-      console.log(response.detail)
       response.detail && response.detail === "Not Found" ?  
-      ( alert("Title Not Found") ) : (
+      ( alert("Game Not Found") ) : (
         setGamesInfo([response])
       )
-    } catch{
-      alert("Don't leave Search Blank")
     }
-  }
 
   return (
     <>

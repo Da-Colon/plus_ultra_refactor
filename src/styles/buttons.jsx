@@ -13,10 +13,12 @@ export const SplashButton = styled.button`
     text-shadow: 1px 1px 2px rgba(0,0,0,5), 2px 3px rgba(0,0,0,0.5);
     color: darkred;
   }
+
 `
 
 export const SearchButton = styled.button`
-  width: 150px;
+  width: 72px;
   height: 24px;
   margin: 16px;
+  border-radius: 15px;
 `

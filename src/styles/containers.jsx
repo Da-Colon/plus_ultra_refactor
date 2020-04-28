@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 300px;
-  height: 475px;
+  width: 18.75rem;
+  height: 29.6875rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,70 +17,87 @@ export const SplashContainer = styled.div`
 `
 
 export const SplashImageContainer = styled.div`
-  width: 260px;
-  height: 360px;
+  width: 16.25rem;
+  height: 22.5rem;
 `
 
 export const NavContainer = styled.div`
-  width: 100%;
-  height: 100px;
+  align-items: center;
+  background-color: rgb(0,0,0);
   display: flex;
+  height: 4.6875rem;
   justify-content: space-around;
+  padding: 1.5rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
 `
 
 export const MainContainer = styled.div`
-  display:flex;
   height: 100%;
-  flex-direction: column;
+  min-width: 18.75rem;
 `
 
 export const ToolBarContainer = styled.div`
-  height: 64px;
+  height: 4rem;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 16px;
+  margin-top: 6.25rem;
+  margin-bottom: 3.125rem;
 `
 
 export const InfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
+  flex-wrap: wrap;
   height: 100%;
   width: 100%;
+  justify-content: space-around;
+
+  div{
+    margin: .5rem;
+  }
 `
 
 export const ContentContainer = styled.div`
-  border: solid orange;
   display: flex;
   flex-direction: column;
-  height: 400px;
-  background-color: rgba(255,255,255,0.2);
-  margin-top: 32px;
+  flex: 1 2 41rem;
 `
 
 export const TitleContainer = styled.div`
+  text-align: center;
 `
 
 export const MainInfoContainer = styled.div`
-  display: flex;
   box-sizing: content-box;
-`
-
-export const ImageContainer = styled.div`
-  border: solid;
-  width: 300px;
-  height: 300px;
-  margin: 32px;
-`
-
-export const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 85%;
-  margin: 16px;
-  min-width: 300px;
-  max-height: 400px; 
+`
+export const MediaContainer = styled.div`
+  background-color: rgba(0,0,0,0.8);
+  height: 18.75rem;
+  border-radius: 2.5rem;
+  padding-bottom: 3rem;
+`
+export const ImageContainer = styled.div`
+  max-width: 100%;
+  min-width: 18.75rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 .5rem;
+  
+`
+
+export const VideoContainer = styled.div`
+  max-width: 100%;
+  min-width: 18.75rem;
+  height: 100%;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 2.5rem;
+  }
 `
 
 export const DescriptionContainer = styled.div`
@@ -89,15 +106,21 @@ export const DescriptionContainer = styled.div`
   ::-webkit-scrollbar {
   display: none;
 }
-  text-align: center;
-  margin: 16px;
-  height: 300px;
-  font-size: 1.1rem;
+  height: 18.75rem;
+
+
+  p{
+    margin: 0 1.5rem;
+    font-size: 1.4em;
+    color: rgb(255,255,255);
+    word-spacing: 0.2em;
+    line-height: 1.8em;
+  }
 `
 
 export const LinksContainer = styled.div`
-  height: 64px;
-  margin-bottom: 46px;
+  height: 4rem;
+  margin-bottom: 2.875;
 
   ul{
     display: flex;
@@ -105,6 +128,6 @@ export const LinksContainer = styled.div`
   }
 
   li{
-    margin-left: 32px;
+    margin-left: 1.5rem;
   }
 `
