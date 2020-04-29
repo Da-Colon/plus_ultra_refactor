@@ -16,7 +16,7 @@ export default function GamesPage(props) {
   })()
   }, []);
 
-  const handleIconClass = (platformName) => {
+  const _handleIconClass = (platformName) => {
     switch (platformName) {
       case "PlayStation":
         return "fab fa-playstation";
@@ -39,7 +39,7 @@ export default function GamesPage(props) {
     }
   };
 
-  const handleStoreLinks = (platformName, stores, name) => {
+  const _handleStoreLinks = (platformName, stores, name) => {
     for (let i = 0; i < stores.length; i++) {
       const checkThis = platformName + " " + stores[i].store.name;
       switch (checkThis) {
@@ -61,11 +61,11 @@ export default function GamesPage(props) {
     return `https://www.google.com/search?q=${name}`;
   };
 
-  const handleSearchChange = e => {
+  const _handleSearchChange = e => {
     setSearchValue(e.target.value)
   }
 
-  const handleSearchSubmit = async e => {
+  const _handleSearchSubmit = async e => {
     e.preventDefault()
       const title = searchValue.replace(/\s/g, "-")
       const response = await get(`https://api.rawg.io/api/games/${title}`)
@@ -78,12 +78,15 @@ export default function GamesPage(props) {
   return (
     <>
       <Component
-        handleSearchChange={handleSearchChange}
-        handleSearchSubmit={handleSearchSubmit}
-        handleStoreLinks={handleStoreLinks}
-        handleIconClass={handleIconClass}
         searchValue={searchValue}
         gamesInfo={gamesInfo}
+        nav="/anime"
+        navLabel="Anime"
+        pageTitle="Games"
+        handleSearchChange={_handleSearchChange}
+        handleSearchSubmit={_handleSearchSubmit}
+        handleStoreLinks={_handleStoreLinks}
+        handleIconClass={_handleIconClass}
       />
     </>
   );

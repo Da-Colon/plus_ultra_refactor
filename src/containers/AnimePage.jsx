@@ -43,6 +43,9 @@ export default function AnimePage() {
     <>
       <Component
         animes={animes}
+        nav="/games"
+        navLabel="Games"
+        pageTitle="Anime"
         searchValue={searchValue}
         handleSearchChange={_handleSearchChange}
         handleSearchSubmit={_handleSearchSubmit}

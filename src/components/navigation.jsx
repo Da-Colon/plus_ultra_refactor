@@ -1,17 +1,15 @@
 import React from 'react'
 import {NavContainer} from '../styles/containers'
-import {NavLink} from '../styles/text'
+import {NavLink, PageTitle} from '../styles/text'
 
 const Navigation = props => (
     <NavContainer>
       <NavLink to="/" id="nav-home">
         Home 
       </NavLink>
-      <NavLink to="/games" id="nav-games">
-        Games
-      </NavLink>
-      <NavLink to="/anime" id="nav-anime">
-        Anime
+      <PageTitle>{props.pageTitle}</PageTitle>
+      <NavLink to={props.nav} id="nav-games">
+        {props.navLabel}
       </NavLink>
     </NavContainer>
   )

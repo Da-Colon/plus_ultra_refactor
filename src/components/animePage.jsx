@@ -22,7 +22,7 @@ import youtubeLogo from '../assets/youtubeLogo.png'
 export default function AnimePage(props) {
   return (
     <MainContainer>
-      <Navigation page={props.page} />
+      <Navigation nav={props.nav} navLabel={props.navLabel} pageTitle={props.pageTitle} />
       <ToolBarContainer>
         <Form onSubmit={props.handleSearchSubmit}>
           <SearchBar

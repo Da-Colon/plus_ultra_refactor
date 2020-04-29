@@ -22,7 +22,7 @@ import nintendoLogo from "../assets/nintendoLogo.png";
 export default function GamesPage(props) {
   return (
     <MainContainer>
-      <Navigation />
+      <Navigation nav={props.nav} navLabel={props.navLabel} pageTitle={props.pageTitle} />
 
       <ToolBarContainer>
         <Form onSubmit={props.handleSearchSubmit}>
