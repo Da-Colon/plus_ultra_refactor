@@ -7,16 +7,17 @@ import {
   ContentContainer,
   MainInfoContainer,
   TitleContainer,
-  ImageContainer,
   DescriptionContainer,
   LinksContainer,
+  Card,
+  ImageContainer,
   MediaContainer,
   VideoContainer,
 } from "../styles/containers";
 import { SearchBar, Form } from "../styles/inputs";
 import { SearchButton } from "../styles/buttons";
 import { GamesTitle, Image } from "../styles/text";
-import "@fortawesome/fontawesome-free/css/all.css";
+import youtubeLogo from '../assets/youtubeLogo.png'
 
 export default function AnimePage(props) {
   return (
@@ -35,45 +36,43 @@ export default function AnimePage(props) {
       </ToolBarContainer>
       <InfoWrapper>
         {props.animes.map((anime) => (
-          <ContentContainer key={anime.attributes.titles.en_jp}>
-            <TitleContainer>
-              <GamesTitle>{anime.attributes.titles.en_jp}</GamesTitle>
-            </TitleContainer>
+          <Card
+            key={anime.attributes.slug}
+            style={{
+              backgroundImage: `url(${anime.attributes.posterImage.medium})`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }}
+          >
+            <ContentContainer>
+              <TitleContainer>
+                <GamesTitle>{anime.attributes.titles.en_jp}</GamesTitle>
+              </TitleContainer>
 
-            <MainInfoContainer>
-              <MediaContainer>
-                {props.step === 0 ? (
-                  <ImageContainer>
-                    <Image src={anime.attributes.posterImage.medium} />
-                  </ImageContainer>
-                ) : props.step === 1 ? (
-                  <VideoContainer>
+              <MainInfoContainer>
+                  <MediaContainer>     
+                {anime.attributes.youtubeVideoId ? (
                     <iframe
-                      src={props.handleYoutubeLink(
-                        anime.attributes.youtubeVideoId,
-                        anime.attributes.slug
-                      )}
-                      frameborder="0"
+                      src={`https://www.youtube.com/embed/${anime.attributes.youtubeVideoId}`}
+                      frameBorder="0"
                       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                    ></iframe>
-                  </VideoContainer>
-                ) : props.step === 2 && anime.attributes.coverImage ? (
-                  <ImageContainer>
-                    <Image src={anime.attributes.coverImage.tiny} />
-                  </ImageContainer>
-                ) : (
-                  "" //Add No Image Graphic
-                )}
-              </MediaContainer>
+                      allowFullScreen
+                      title={props.animeSlug}
+                      ></iframe>
+                      ) : (
+                        <img src={youtubeLogo} />
+                      )}
 
-              <DescriptionContainer>
-                <p>{anime.attributes.synopsis}</p>
-              </DescriptionContainer>
 
-              <LinksContainer></LinksContainer>
-            </MainInfoContainer>
-          </ContentContainer>
+                </MediaContainer>
+
+                <DescriptionContainer>
+                  <p>{anime.attributes.synopsis}</p>
+                </DescriptionContainer>
+              </MainInfoContainer>
+            </ContentContainer>
+          </Card>
         ))}
       </InfoWrapper>
     </MainContainer>

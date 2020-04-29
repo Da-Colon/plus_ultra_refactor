@@ -53,14 +53,22 @@ export const InfoWrapper = styled.div`
   justify-content: space-around;
 
   div{
-    margin: .5rem;
+    margin: 1.7rem;
+    max-width: 800px;
   }
+`
+
+export const Card = styled.div`
+  display: flex;
+  flex: 1 2 800px;
+  flex-wrap: row wrap;
+  border: double 10px white;
+  height: max-content;
 `
 
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1 2 41rem;
 `
 
 export const TitleContainer = styled.div`
@@ -73,44 +81,42 @@ export const MainInfoContainer = styled.div`
   flex-direction: column;
 `
 export const MediaContainer = styled.div`
-  background-color: rgba(0,0,0,0.8);
-  height: 18.75rem;
-  border-radius: 2.5rem;
-  padding-bottom: 3rem;
-`
-export const ImageContainer = styled.div`
-  max-width: 100%;
-  min-width: 18.75rem;
-  height: 100%;
   display: flex;
   justify-content: center;
-  margin: 0 .5rem;
+  align-items: center;
+  height: 18.75rem;
+  border-radius: 1.0rem;
+  background-color: rgba(0,0,0,0.5);
   
-`
-
-export const VideoContainer = styled.div`
-  max-width: 100%;
-  min-width: 18.75rem;
-  height: 100%;
-
   iframe {
     width: 100%;
     height: 100%;
     border-radius: 2.5rem;
   }
 `
+export const ImageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  
+`
 
 export const DescriptionContainer = styled.div`
+  box-shadow: 10px 10px 5px black;
   overflow-y: scroll;
   -ms-overflow-style: none;
   ::-webkit-scrollbar {
   display: none;
 }
-  height: 18.75rem;
+  background-color: rgba(30,20,20,0.8);
+  font-weight: 500;
+  height: 23rem;
+  text-shadow: 4px 6px black;
 
 
   p{
-    margin: 0 1.5rem;
+    margin: 0 1rem;
     font-size: 1.4em;
     color: rgb(255,255,255);
     word-spacing: 0.2em;

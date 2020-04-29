@@ -1,51 +1,54 @@
-import React, {useState, useEffect} from 'react'
-import Component from '../components/animePage'
-import get from '../utils/get'
+import React, { useState, useEffect } from "react";
+import Component from "../components/animePage";
+import get from "../utils/get";
 
 export default function AnimePage() {
-  const [animes, setAnimes] = useState([])
-  const [searchValue, setSearchValue] = useState("")
-  const [step, setStep] = useState(1)
+  const [animes, setAnimes] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     (async () => {
-      const response = await get(`https://kitsu.io/api/edge//anime?page[limit]=10&page[offset]=1`)
-      setAnimes(response.data)
-    })()
-  },[])
+      const response = await get(
+        `https://kitsu.io/api/edge//anime?page[limit]=10&page[offset]=5`
+      );
+      setAnimes(response.data);
+    })();
+  }, []);
 
-  const handleYoutubeLink = (youtubeLink, animeName) => {
-    if(!youtubeLink){
-      return `https://www.youtube.com/results?search_query=${animeName}`
+
+  const _handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const _handleSearchSubmit = async (e) => {
+    e.preventDefault();
+    const title = searchValue.replace(/\s/g, "-");
+    const response = await get(
+      `https://kitsu.io/api/edge/anime?filter[text]=${title}`
+    );
+    response.data.length ? setAnimes(response.data) : alert("Anime Not Found");
+  };
+
+  const _handleBackground = (e, image) => {
+    let style = e.target.style
+    style = {
+      backgroundImage: `url(${image})`,
+      backgroundSize: "cover",
+      backgrondPosition: "center",
+      backgroundRepeat: "no-repeat"
     }
-    return `https://www.youtube.com/embed/${youtubeLink}`
-  }
-
-  const handleSearchChange = e => {
-    setSearchValue(e.target.value)
-  }
-
-  const handleSearchSubmit = async e => {
-    e.preventDefault()
-      const title = searchValue.replace(/\s/g, "-")
-      const response = await get(`https://kitsu.io/api/edge/anime?filter[text]=${title}`)
-      response.data.length ? (
-        setAnimes(response.data)
-      ) : (
-        alert("Anime Not Found")
-      )
+    console.log(style)
   }
 
   return (
     <>
-     <Component
-      step={step}
-      animes={animes} 
-      handleYoutubeLink={handleYoutubeLink}
-      handleSearchChange={handleSearchChange}
-      handleSearchSubmit={handleSearchSubmit}
-      searchValue={searchValue}
-      /> 
+      <Component
+        animes={animes}
+        searchValue={searchValue}
+        handleSearchChange={_handleSearchChange}
+        handleSearchSubmit={_handleSearchSubmit}
+        handleBackground={_handleBackground}
+      />
     </>
-  )
+  );
 }

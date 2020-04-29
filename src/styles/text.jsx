@@ -6,7 +6,7 @@ export const GamesTitle = styled.h2`
 `
 
 export const Image = styled.img`
-  border-radius: 2.5rem;
+  border-radius: 1rem;
   max-width: 100%;
   height: 100%;
 `
