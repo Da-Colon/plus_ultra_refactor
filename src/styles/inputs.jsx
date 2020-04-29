@@ -9,8 +9,6 @@ export const SearchBar = styled.input`
   width: 200px;
   height: 32px;
   border-radius: 25px;
+  padding-left: 16px;
 
-  ::placeholder{
-    padding-left: 20px;
-  }
 `

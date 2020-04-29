@@ -27,3 +27,10 @@ export const NavLink = styled(Link)`
       transform: scale(1.2)
     }
 `
+
+export const StoreLink = styled.a`
+  color: gold;
+  :visited {
+    color: goldenrod;
+  }
+`

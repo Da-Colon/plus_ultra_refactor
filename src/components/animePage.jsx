@@ -61,9 +61,8 @@ export default function AnimePage(props) {
                       title={props.animeSlug}
                       ></iframe>
                       ) : (
-                        <img src={youtubeLogo} />
+                        <a href={`https://www.youtube.com/results?search_query=${anime.attributes.slug}`}><img src={youtubeLogo} /></a>
                       )}
-
 
                 </MediaContainer>
 

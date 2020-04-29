@@ -37,7 +37,6 @@ export default function AnimePage() {
       backgrondPosition: "center",
       backgroundRepeat: "no-repeat"
     }
-    console.log(style)
   }
 
   return (
