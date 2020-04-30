@@ -1,10 +1,10 @@
 import React, { useEffect, useState} from "react";
 import Component from "../components/gamesPage";
 import get from "../utils/get";
+import * as Yup from 'yup';
 
 export default function GamesPage(props) {
   const [gamesInfo, setGamesInfo] = useState([])
-  const [searchValue, setSearchValue] = useState("")
 
   useEffect(() => {
     (async ()=> {
@@ -24,6 +24,8 @@ export default function GamesPage(props) {
         return "fab fa-windows";
       case "Xbox":
         return "fab fa-xbox";
+      case "Nintendo":
+        return "fab fa-neos"
       case "Apple Macintosh":
         return "fab fa-apple";
       case "Steam":
@@ -61,13 +63,8 @@ export default function GamesPage(props) {
     return `https://www.google.com/search?q=${name}`;
   };
 
-  const _handleSearchChange = e => {
-    setSearchValue(e.target.value)
-  }
-
-  const _handleSearchSubmit = async e => {
-    e.preventDefault()
-      const title = searchValue.replace(/\s/g, "-")
+  const _handleSearchSubmit = async ({search}) => {
+      const title = search.replace(/\s/g, "-")
       const response = await get(`https://api.rawg.io/api/games/${title}`)
       response.detail && response.detail === "Not Found" ?  
       ( alert("Game Not Found") ) : (
@@ -75,18 +72,26 @@ export default function GamesPage(props) {
       )
     }
 
+    const _validationSchema = () => {
+      return Yup.object().shape({
+        search: Yup.string()
+          .required('Enter a title')
+          .min(2, 'Word is too short, Minimum: 2')
+          .max(25,'Word is too long, Maximum: 25')
+      })
+    }
+
   return (
     <>
       <Component
-        searchValue={searchValue}
         gamesInfo={gamesInfo}
         nav="/anime"
         navLabel="Anime"
         pageTitle="Games"
-        handleSearchChange={_handleSearchChange}
         handleSearchSubmit={_handleSearchSubmit}
         handleStoreLinks={_handleStoreLinks}
         handleIconClass={_handleIconClass}
+        validationSchema={_validationSchema}
       />
     </>
   );

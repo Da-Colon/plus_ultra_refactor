@@ -1,12 +1,12 @@
 import React from 'react';
 import Router from './router';
-import { AppWrapper } from './styles/Layout/AppWrapper';
+import './styles/stylesCSS/styles.css'
 
 const App = () => (
 
-  <AppWrapper>
+  <div className="app-wrapper">
   <Router />
-  </AppWrapper>
+  </div>
 
 )
 

@@ -1,79 +1,81 @@
 import React from "react";
 import Navigation from "../components/navigation";
-import {
-  MainContainer,
-  ToolBarContainer,
-  InfoWrapper,
-  ContentContainer,
-  MainInfoContainer,
-  TitleContainer,
-  DescriptionContainer,
-  LinksContainer,
-  Card,
-  ImageContainer,
-  MediaContainer,
-  VideoContainer,
-} from "../styles/containers";
-import { SearchBar, Form } from "../styles/inputs";
-import { SearchButton } from "../styles/buttons";
-import { GamesTitle, Image } from "../styles/text";
-import youtubeLogo from '../assets/youtubeLogo.png'
+import youtubeLogo from "../assets/youtubeLogo.png";
+import Error from "./Error";
+import { Formik } from "formik";
 
 export default function AnimePage(props) {
   return (
-    <MainContainer>
-      <Navigation nav={props.nav} navLabel={props.navLabel} pageTitle={props.pageTitle} />
-      <ToolBarContainer>
-        <Form onSubmit={props.handleSearchSubmit}>
-          <SearchBar
-            type="text"
-            onChange={props.handleSearchChange}
-            value={props.searchValue}
-            placeholder="Search Anime..."
-          />
-          <SearchButton type="submit">Search</SearchButton>
-        </Form>
-      </ToolBarContainer>
-      <InfoWrapper>
+    <>
+      <Navigation
+        nav={props.nav}
+        navLabel={props.navLabel}
+        pageTitle={props.pageTitle}
+      />
+      <div className="search-bar-container">
+        <Formik
+          initialValues={{
+            search: "",
+          }}
+          onSubmit={(values) => props.handleSearchSubmit(values)}
+          validationSchema={props.validationSchema}
+        >
+          {({ values, handleSubmit, handleChange, errors }) => (
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                onChange={handleChange}
+                name="search"
+                value={values.search}
+                placeholder="Search Anime..."
+              />
+              <button type="submit">Search</button>
+              {errors.search && <Error>{errors.search}</Error>}
+            </form>
+          )}
+        </Formik>
+      </div>
+      <div className="main-container">
         {props.animes.map((anime) => (
-          <Card
+          <div
+            className="card"
             key={anime.attributes.slug}
             style={{
               backgroundImage: `url(${anime.attributes.posterImage.medium})`,
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
+              backgroundPosition: "top center",
             }}
           >
-            <ContentContainer>
-              <TitleContainer>
-                <GamesTitle>{anime.attributes.titles.en_jp}</GamesTitle>
-              </TitleContainer>
+            <h2>{anime.attributes.titles.en_jp}</h2>
 
-              <MainInfoContainer>
-                  <MediaContainer>     
+              <div className="img-container">
                 {anime.attributes.youtubeVideoId ? (
-                    <iframe
-                      src={`https://www.youtube.com/embed/${anime.attributes.youtubeVideoId}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title={props.animeSlug}
-                      ></iframe>
-                      ) : (
-                        <a href={`https://www.youtube.com/results?search_query=${anime.attributes.slug}`}><img src={youtubeLogo} /></a>
-                      )}
+                  <iframe
+                    src={`https://www.youtube.com/embed/${anime.attributes.youtubeVideoId}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={props.animeSlug}
+                  ></iframe>
+                ) : (
+                  <a
+                    href={`https://www.youtube.com/results?search_query=${anime.attributes.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img alt="Youtube Search" src={youtubeLogo} />
+                  </a>
+                )}
+              </div>
 
-                </MediaContainer>
-
-                <DescriptionContainer>
-                  <p>{anime.attributes.synopsis}</p>
-                </DescriptionContainer>
-              </MainInfoContainer>
-            </ContentContainer>
-          </Card>
+              
+                <p className="description">{anime.attributes.synopsis ? anime.attributes.synopsis : "No Description Available"}</p>
+       
+           
+          </div>
         ))}
-      </InfoWrapper>
-    </MainContainer>
+      </div>
+    </>
   );
 }

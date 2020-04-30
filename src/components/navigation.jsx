@@ -1,17 +1,16 @@
 import React from 'react'
-import {NavContainer} from '../styles/containers'
-import {NavLink, PageTitle} from '../styles/text'
+import {Link} from 'react-router-dom'
 
 const Navigation = props => (
-    <NavContainer>
-      <NavLink to="/" id="nav-home">
+    <div className="nav">
+      <Link className="nav-link" to="/" id="nav-home">
         Home 
-      </NavLink>
-      <PageTitle>{props.pageTitle}</PageTitle>
-      <NavLink to={props.nav} id="nav-games">
+      </Link>
+      <h1>{props.pageTitle}</h1>
+      <Link className="nav-link" to={props.nav} id="nav-games">
         {props.navLabel}
-      </NavLink>
-    </NavContainer>
+      </Link>
+    </div>
   )
 
 
