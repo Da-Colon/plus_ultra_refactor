@@ -8,11 +8,12 @@ export default function GamesPage(props) {
 
   useEffect(() => {
     (async ()=> {
-      const responseGamesTitles = await get("https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=+rating&page_size=10")
-      responseGamesTitles.results.forEach(async game => {
-        const responseGames = await get(`https://api.rawg.io/api/games/${game.slug.replace(/\?/g, " ")}`)
-        await setGamesInfo((info) => [...info, responseGames]);
-    })
+        const responseGamesTitles = await get("https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=+rating&page_size=9")
+        responseGamesTitles.results.forEach(async game => {
+          const responseGames = await get(`https://api.rawg.io/api/games/${game.slug.replace(/\?/g, " ")}`)
+          await setGamesInfo((info) => [...info, responseGames]);
+        })
+      
   })()
   }, []);
 
@@ -66,8 +67,9 @@ export default function GamesPage(props) {
   const _handleSearchSubmit = async ({search}) => {
       const title = search.replace(/\s/g, "-")
       const response = await get(`https://api.rawg.io/api/games/${title}`)
-      response.detail && response.detail === "Not Found" ?  
-      ( alert("Game Not Found") ) : (
+      console.log(response.detail)
+      response.detail && response.detail === "Not Found." ?  
+      ( setGamesInfo([])  ) : (
         setGamesInfo([response])
       )
     }
@@ -76,7 +78,7 @@ export default function GamesPage(props) {
       return Yup.object().shape({
         search: Yup.string()
           .required('Enter a title')
-          .min(2, 'Word is too short, Minimum: 2')
+          .min(4, 'Word is too short, Minimum: 4')
           .max(25,'Word is too long, Maximum: 25')
       })
     }

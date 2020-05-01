@@ -38,55 +38,57 @@ export default function GamesPage(props) {
       {/* Info Wrapper */}
       <div className="main-container">
         {/* Card */}
-        {props.gamesInfo.map((game, i) => (
-          <div
-            className="card"
-            key={game.name}
-            style={{
-              backgroundImage: `url(${game.background_image_additional})`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-            }}
-          >
-            {/* ContentContainer */}
+        {props.gamesInfo.map(
+          (game, i) =>
+            game.parent_platforms && (
+              <div
+                className="card"
+                key={game.name}
+                style={{
+                  backgroundImage: `url(${game.background_image_additional})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}
+              >
+                {/* ContentContainer */}
 
-            <h2>{game.name}</h2>
+                <h2>{game.name}</h2>
 
-            <div className="img-container">
-              <img alt={game.name} src={game.background_image} />
-            </div>
+                <div className="img-container">
+                  <img alt={game.name} src={game.background_image} />
+                </div>
 
-            <div className="platforms-container">
-              <ul>
-                <li>Availible On:</li>
-                {game.parent_platforms.map((platform) => (
-                  <li key={platform.platform.name}>
-                    <a
-                      className="store-link"
-                      href={props.handleStoreLinks(
-                        platform.platform.name,
-                        game.stores,
-                        game.name
-                      )}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none", color: "none" }}
-                    >
-                        <i
-                          className={`--fa-secondary-color ${props.handleIconClass(
-                            platform.platform.name
-                          )} fa-2x`}
-                        />
-                      
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-              <p className="description">{game.description_raw}</p>
-          </div>
-        ))}
+                <div className="platforms-container">
+                  <ul>
+                    <li>Availible On:</li>
+                    {game.parent_platforms.map((platform) => (
+                      <li key={platform.platform.name}>
+                        <a
+                          className="store-link"
+                          href={props.handleStoreLinks(
+                            platform.platform.name,
+                            game.stores,
+                            game.name
+                          )}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ textDecoration: "none", color: "none" }}
+                        >
+                          <i
+                            className={`--fa-secondary-color ${props.handleIconClass(
+                              platform.platform.name
+                            )} fa-2x`}
+                          />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <p className="description">{game.description_raw}</p>
+              </div>
+            )
+        )}
       </div>
     </>
   );
