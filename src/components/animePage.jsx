@@ -42,7 +42,7 @@ export default function AnimePage(props) {
             key={anime.attributes.slug}
             style={{
               backgroundImage: `url(${anime.attributes.posterImage.medium})`,
-              backgroundSize: "contain",
+              backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "top center",
             }}

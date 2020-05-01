@@ -11,7 +11,7 @@ export default function GamesPage(props) {
       const responseGamesTitles = await get("https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=+rating&page_size=10")
       responseGamesTitles.results.forEach(async game => {
         const responseGames = await get(`https://api.rawg.io/api/games/${game.slug.replace(/\?/g, " ")}`)
-        setGamesInfo((info) => [...info, responseGames]);
+        await setGamesInfo((info) => [...info, responseGames]);
     })
   })()
   }, []);
