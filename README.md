@@ -28,6 +28,11 @@ Originally DigitalCrafts front-end Project using HTML, CSS, and JavaScript. The 
 - [Yup](https://github.com/jquense/yup)
 - [Formik](https://jaredpalmer.com/formik/)
 
+<b>APIs</b>
+
+- [Games - rawg.io](https://rawg.io/apidocs)
+
+- [Anime - kitsu.docs.apiary.io](https://kitsu.docs.apiary.io/)
 
 ## Tests
 
