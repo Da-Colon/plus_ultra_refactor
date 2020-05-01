@@ -9,7 +9,7 @@ export default function AnimePage() {
   useEffect(() => {
     (async () => {
       const response = await get(
-        `https://kitsu.io/api/edge/anime?page[limit]=9&page[offset]=1`
+        `https://kitsu.io/api/edge/anime?page[limit]=6&page[offset]=1`
       );
       setAnimes(response.data);
     })();

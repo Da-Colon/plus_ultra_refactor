@@ -1,20 +1,26 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Component from "../components/gamesPage";
 import get from "../utils/get";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 export default function GamesPage(props) {
-  const [gamesInfo, setGamesInfo] = useState([])
+  const [gamesInfo, setGamesInfo] = useState([]);
 
   useEffect(() => {
-    (async ()=> {
-        const responseGamesTitles = await get("https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=+rating&page_size=9")
-        responseGamesTitles.results.forEach(async game => {
-          const responseGames = await get(`https://api.rawg.io/api/games/${game.slug.replace(/\?/g, " ")}`)
+    (async () => {
+      if (!window.localStorage.key(0)) {
+        const responseGamesTitles = await get(
+          "https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=+rating&page_size=6"
+          );
+        await window.localStorage.setItem("game", JSON.stringify(responseGamesTitles.results));
+      }
+        await JSON.parse(window.localStorage.getItem('game')).forEach(async (game) => {
+          const responseGames = await get(
+            `https://api.rawg.io/api/games/${game.slug.replace(/\?/g, " ")}`
+          );
           await setGamesInfo((info) => [...info, responseGames]);
         })
-      
-  })()
+    })();
   }, []);
 
   const _handleIconClass = (platformName) => {
@@ -26,13 +32,13 @@ export default function GamesPage(props) {
       case "Xbox":
         return "fab fa-xbox";
       case "Nintendo":
-        return "fab fa-neos"
+        return "fab fa-neos";
       case "Apple Macintosh":
         return "fab fa-apple";
       case "Steam":
-        return "fab fa-steam"
+        return "fab fa-steam";
       case "Linux":
-        return "fab fa-linux"
+        return "fab fa-linux";
       case "Android":
         return "fab fa-android";
       case "iOS":
@@ -64,24 +70,22 @@ export default function GamesPage(props) {
     return `https://www.google.com/search?q=${name}`;
   };
 
-  const _handleSearchSubmit = async ({search}) => {
-      const title = search.replace(/\s/g, "-")
-      const response = await get(`https://api.rawg.io/api/games/${title}`)
-      console.log(response.detail)
-      response.detail && response.detail === "Not Found." ?  
-      ( setGamesInfo([])  ) : (
-        setGamesInfo([response])
-      )
-    }
+  const _handleSearchSubmit = async ({ search }) => {
+    const title = search.replace(/\s/g, "-");
+    const response = await get(`https://api.rawg.io/api/games/${title}`);
+    response.detail && response.detail === "Not Found."
+      ? setGamesInfo([])
+      : setGamesInfo([response]);
+  };
 
-    const _validationSchema = () => {
-      return Yup.object().shape({
-        search: Yup.string()
-          .required('Enter a title')
-          .min(4, 'Word is too short, Minimum: 4')
-          .max(25,'Word is too long, Maximum: 25')
-      })
-    }
+  const _validationSchema = () => {
+    return Yup.object().shape({
+      search: Yup.string()
+        .required("Enter a title")
+        .min(4, "Word is too short, Minimum: 4")
+        .max(25, "Word is too long, Maximum: 25"),
+    });
+  };
 
   return (
     <>

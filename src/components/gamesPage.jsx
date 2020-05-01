@@ -51,7 +51,6 @@ export default function GamesPage(props) {
                   backgroundPosition: "center",
                 }}
               >
-                {/* ContentContainer */}
 
                 <h2>{game.name}</h2>
 
