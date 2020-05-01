@@ -31,7 +31,7 @@ export default function splashPage(props) {
       )}
 
       <div className="splash-container">
-        <h1>Choose your Charactor!</h1>
+        <h1>Choose your Character!</h1>
         <div className="splash-center-container">
           <div
             className="splash-img-container"

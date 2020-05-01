@@ -1,6 +1,6 @@
 import React from "react";
 import Navigation from "../components/navigation";
-import youtubeLogo from "../assets/youtubeLogo.png";
+import youtubeLogo from "../assets/youtubeLogo.jpg";
 import Error from "./Error";
 import { Formik } from "formik";
 

@@ -91,7 +91,7 @@ export default function Modal(props) {
                 <p className="description">{props.anime.attributes.synopsis ? props.anime.attributes.synopsis : "No Description Available"}</p>
               </div>
               )}
-        <button onClick={props.handleClose}>Cancel</button>
+        <button className="cancel-button" handleClose={props.handleClose}>Cancel</button>
       </div>
     </>
   );

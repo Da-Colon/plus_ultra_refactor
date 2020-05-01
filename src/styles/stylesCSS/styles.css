@@ -79,6 +79,13 @@ h2 {
   flex-direction: column;
 }
 
+.cancel-button {
+  padding: .2rem 6rem;
+  font-size: 1.1rem;
+  background-color: rgba(219, 166, 166, 0.705);
+  border-radius: .5rem;
+}
+
 /* Navigation */
 
 .nav {
@@ -93,10 +100,14 @@ h2 {
   width: 100%;
 }
 
+.nav h1 {
+  padding: 1rem;
+}
+
 .nav-link {
   color: white;
-  font-size: 24px;
-  letter-spacing: 6px;
+  font-size: 1.3em;
+  letter-spacing: .2em;
   text-decoration: none;
 }
 
